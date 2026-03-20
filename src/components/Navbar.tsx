@@ -13,7 +13,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background border-b border-border">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="font-syne text-2xl font-extrabold tracking-tight text-foreground">
           PA<span className="text-primary">.</span>
@@ -53,18 +53,20 @@ const Navbar = () => {
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-card border-l border-border md:hidden transition-transform duration-300 ease-out z-50 ${open ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="pt-20 px-6 flex flex-col gap-6">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={() => setOpen(false)}
-              className="text-lg font-syne font-bold text-foreground hover:text-primary transition-colors"
-              activeClassName="text-primary"
-            >
-              {link.label}
-            </NavLink>
-          ))}
+        <div className="pt-16 px-4 flex flex-col gap-0">
+          <div className="bg-background rounded-lg shadow-lg border border-border">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={() => setOpen(false)}
+                className="block text-lg font-syne font-bold text-foreground hover:text-primary transition-colors py-4 border-b border-border last:border-b-0 pl-6"
+                activeClassName="text-primary"
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

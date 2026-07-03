@@ -1,35 +1,73 @@
 import { Code2, Trophy, Code } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 const categories = [
   {
-    title: "Frontend",
+    title: "Machine Learning",
     color: "bg-indigo/15 text-indigo border-indigo/20",
-    skills: ["React.js", "Next.js", "HTML", "CSS", "JavaScript", "Tailwind CSS"],
+    skills: [
+      "TensorFlow",
+      "Scikit-learn",
+      "CNN",
+      "RNN",
+      "OpenCV",
+      "Pandas",
+      "NumPy"
+    ],
+  },
+  {
+    title: "Frontend",
+    color: "bg-cyan/15 text-cyan border-cyan/20",
+    skills: [
+      "React.js",
+      "Next.js",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Tailwind CSS"
+    ],
   },
   {
     title: "Backend",
-    color: "bg-cyan/15 text-cyan border-cyan/20",
-    skills: ["Node.js", "Express.js", "Java Spring Boot", "REST APIs"],
+    color: "bg-pink/15 text-pink border-pink/20",
+    skills: [
+      "Node.js",
+      "Express.js",
+      "Java Spring Boot",
+      "REST APIs"
+    ],
   },
   {
     title: "Database",
-    color: "bg-pink/15 text-pink border-pink/20",
-    skills: ["MongoDB", "MySQL", "Supabase"],
+    color: "bg-indigo/15 text-indigo border-indigo/20",
+    skills: [
+      "MongoDB",
+      "MySQL",
+      "Supabase"
+    ],
   },
   {
     title: "Tools",
-    color: "bg-indigo/15 text-indigo border-indigo/20",
-    skills: ["Git", "GitHub", "VS Code", "Postman", "Virtual Box"],
-  },
-  {
-    title: "AI & Cloud",
     color: "bg-cyan/15 text-cyan border-cyan/20",
-    skills: ["Gemini API", "Firebase", "LLM Integration"],
+    skills: [
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Postman",
+      "kaggle",
+      "google colab",
+    ],
   },
   {
     title: "Core Competencies",
     color: "bg-pink/15 text-pink border-pink/20",
-    skills: ["C", "Java", "Full Stack Development (MERN)", "Responsive Design", "API Development & Integration"],
+    skills: [
+      "Machine Learning",
+      "Deep Learning",
+      "Full Stack Development (MERN)",
+      "API Development & Integration",
+      "Problem Solving"
+    ],
   },
 ];
 
@@ -38,13 +76,13 @@ const codingPractices = [
     name: "SkillRack",
     icon: Trophy,
     stat: "Coding Practice",
-    link: "http://www.skillrack.com/profile/444945/919a9d785160fa2c4c246c5830417b396c75cd40",
+    link: siteConfig.skillrack,
   },
   {
     name: "CodeChef",
     icon: Code2,
     stat: "Competitive Programming",
-    link: "https://www.codechef.com/users/abinaya_196",
+    link: siteConfig.codechef,
   },
 ];
 

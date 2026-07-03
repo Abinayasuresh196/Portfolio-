@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Send, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
-emailjs.init("oIvJ8AaL3kwfexZQK");
+const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
 const ContactForm = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -17,6 +19,16 @@ const ContactForm = () => {
       toast({ title: "Please fill in all fields", variant: "destructive" });
       return;
     }
+
+    if (!publicKey || !serviceId || !templateId) {
+      toast({
+        title: "Contact form unavailable",
+        description: "Email service is not configured. Please email me directly.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setSending(true);
 
     const templateParams = {
@@ -25,20 +37,24 @@ const ContactForm = () => {
       message: form.message,
     };
 
-    emailjs.send(
-      "pon_abi112",
-      "template_rwsqzdp",
-      templateParams,
-      "oIvJ8AaL3kwfexZQK"
-    )
-    .then((response) => {
-      toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
-      setForm({ name: "", email: "", message: "" });
-      setSending(false);
-    }, (error) => {
-      toast({ title: "Error sending message", description: "Please try again later.", variant: "destructive" });
-      setSending(false);
-    });
+    emailjs
+      .send(serviceId, templateId, templateParams, { publicKey })
+      .then(() => {
+        toast({
+          title: "Message sent!",
+          description: "Thanks for reaching out. I'll get back to you soon.",
+        });
+        setForm({ name: "", email: "", message: "" });
+        setSending(false);
+      })
+      .catch(() => {
+        toast({
+          title: "Error sending message",
+          description: "Please try again later or email me directly.",
+          variant: "destructive",
+        });
+        setSending(false);
+      });
   };
 
   return (
@@ -47,7 +63,7 @@ const ContactForm = () => {
         <span className="inline-flex items-center justify-center text-muted-foreground">
           <Mail size={16} />
         </span>
-        <h2 className="font-syne font-extrabold text-3xl text-foreground">Get In Touch</h2>
+        <h2 className="font-syne font-extrabold text-3xl text-foreground">Start a Conversation</h2>
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-xl space-y-4">
@@ -57,7 +73,7 @@ const ContactForm = () => {
             type="text"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            placeholder="Your name"
+            placeholder="Your name or organization"
             maxLength={100}
             className="w-full px-4 py-3 rounded-lg bg-card border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
           />
@@ -78,7 +94,7 @@ const ContactForm = () => {
           <textarea
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
-            placeholder="Suggestions..."
+            placeholder="Share details about your project, opportunity, or collaboration idea..."
             rows={5}
             maxLength={1000}
             className="w-full px-4 py-3 rounded-lg bg-card border border-border text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none"

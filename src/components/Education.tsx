@@ -1,4 +1,5 @@
 import { GraduationCap, Calendar } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 const Education = () => {
   return (
@@ -17,14 +18,12 @@ const Education = () => {
               <GraduationCap size={20} className="text-primary" />
             </div>
             <div>
-              <h3 className="font-syne font-bold text-foreground">Francis Xavier Engineering College</h3>
-              <p className="text-xs text-muted-foreground">Tirunelveli, Tamil Nadu</p>
+              <h3 className="font-syne font-bold text-foreground">{siteConfig.college}</h3>
+              <p className="text-xs text-muted-foreground">{siteConfig.location}</p>
             </div>
           </div>
           <p className="text-sm text-muted-foreground">
-            B.Tech — Information Technology
-            <br />
-            (Specialized in Data Science)
+            {siteConfig.degree}
           </p>
         </div>
 
@@ -34,13 +33,13 @@ const Education = () => {
               <Calendar size={20} className="text-cyan" />
             </div>
             <div>
-              <h3 className="font-syne font-bold text-foreground">CGPA 9.2</h3>
+              <h3 className="font-syne font-bold text-foreground">CGPA {siteConfig.cgpa}</h3>
               <p className="text-xs text-muted-foreground">Current Academic Score</p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar size={14} />
-            2023 — 2027
+            {siteConfig.graduationYears}
           </div>
         </div>
       </div>

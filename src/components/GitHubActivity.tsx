@@ -83,7 +83,7 @@ const GitHubActivity = () => {
         <span className="inline-flex items-center justify-center text-muted-foreground">
           <Github size={16} />
         </span>
-        <h2 className="font-syne font-extrabold text-3xl text-foreground">GitHub Activity</h2>
+        <h2 className="font-syne font-extrabold text-3xl text-foreground">GitHub Activity & Impact</h2>
       </div>
 
       {/* Contribution Graph */}
@@ -96,7 +96,7 @@ const GitHubActivity = () => {
             </div>
             <div>
               <p className="font-syne font-bold text-xl text-foreground">{stats.totalCommits}</p>
-              <p className="text-xs text-muted-foreground">Total Commits</p>
+              <p className="text-xs text-muted-foreground">Total commits</p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-secondary/30 rounded-lg p-4">
@@ -105,7 +105,7 @@ const GitHubActivity = () => {
             </div>
             <div>
               <p className="font-syne font-bold text-xl text-foreground">{stats.totalPRs}</p>
-              <p className="text-xs text-muted-foreground">Total PRs</p>
+              <p className="text-xs text-muted-foreground">Pull requests</p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-secondary/30 rounded-lg p-4">
@@ -114,7 +114,7 @@ const GitHubActivity = () => {
             </div>
             <div>
               <p className="font-syne font-bold text-xl text-foreground">{stats.totalIssues}</p>
-              <p className="text-xs text-muted-foreground">Total Issues</p>
+              <p className="text-xs text-muted-foreground">Issues resolved</p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-secondary/30 rounded-lg p-4">
@@ -123,7 +123,7 @@ const GitHubActivity = () => {
             </div>
             <div>
               <p className="font-syne font-bold text-xl text-foreground">{stats.contributedTo}</p>
-              <p className="text-xs text-muted-foreground">Contributed To</p>
+              <p className="text-xs text-muted-foreground">Repositories contributed to</p>
             </div>
           </div>
         </div>

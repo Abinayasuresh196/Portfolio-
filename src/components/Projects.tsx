@@ -1,5 +1,5 @@
 import { Github, ExternalLink, FileText, LayoutGrid, Linkedin, Star, GitFork, Code, Calendar, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -23,6 +23,11 @@ type Project = {
   linkedin?: string;
   screenshots: string[];
   demoVideo?: string;
+  featuredBadge?: string;
+  year?: string;
+  role?: string;
+  challenges?: string[];
+  learnings?: string[];
 };
 
 interface RepoData {
@@ -43,9 +48,39 @@ interface RepoData {
 
 const projects: Project[] = [
   {
+    name: "Veriframe",
+    status: "Completed",
+    desc: "A state-of-the-art video forensics platform that uses advanced deep learning (CNN + RNN + attention) to detect deepfakes and visual manipulations with frame-level forensics and temporal consistency checks.",
+    tech: ["FastAPI", "React 19", "TypeScript", "TailwindCSS", "MongoDB Atlas", "Cloudinary", "OpenCV", "NumPy", "ONNX Runtime"],
+    github: "https://github.com/Abinayasuresh196/veriframe",
+    live: "https://veriframe-frontend.vercel.app/",
+    techDoc: "/docs/veriframe-technical.pdf",
+    simpleDoc: "/docs/veriframe-simple.pdf",
+    screenshots: [
+      "/projects/veriframe/veriframe1.jpeg",
+      "/projects/veriframe/veriframe2.jpeg",
+      "/projects/veriframe/veriframe3.jpeg",
+      "/projects/veriframe/veriframe4.jpeg",
+      "/projects/veriframe/veriframe5.jpeg",
+      "/projects/veriframe/veriframe6.jpeg",
+      "/projects/veriframe/veriframe7.jpeg",
+    ],
+    demoVideo: "/projects/veriframe/veriframe.mp4",
+    featuredBadge: "⭐ Featured ML Project",
+    role: "Solo Developer",
+    challenges: [
+      "Combining CNN, RNN, and attention mechanisms for temporal deepfake detection",
+      "Processing video frames efficiently for real-time forensic analysis",
+    ],
+    learnings: [
+      "Deploying ML models with ONNX Runtime in a production web stack",
+      "Building full-stack ML applications with FastAPI, React, and MongoDB Atlas",
+    ],
+  },
+  {
     name: "Women Empowerment",
     status: "Completed",
-    desc: "A women empowerment platform focused on resources, community support, and access to opportunities.",
+    desc: "A women-centric empowerment platform that provides curated resources, community support, and access to learning and career opportunities.",
     tech: ["React", "Tailwind", "Netlify"],
     github: "https://github.com/Abinayasuresh196/Women-Awareness_MERN",
     live: "https://keen-sorbet-c9a258.netlify.app/",
@@ -57,15 +92,24 @@ const projects: Project[] = [
       "/projects/women-empowerment/women-empowerment-screenshot3.png",
     ],
     demoVideo: "/projects/women-empowerment/women-empowerment-demo.mp4",
+    role: "Solo Developer",
+    challenges: [
+      "Designing an accessible platform for diverse user needs",
+      "Organizing content and community features in a clear information architecture",
+    ],
+    learnings: [
+      "Building responsive React applications deployed on Netlify",
+      "Structuring frontend projects for maintainability and scalability",
+    ],
   },
   {
     name: "VisionBoard",
-    status: "Active",
-    desc: "AI-powered strategy and vision board platform for goal planning and tracking with intelligent suggestions.",
+    status: "Completed",
+    desc: "AI-powered strategy and visual goal-planning platform that turns high-level ambitions into actionable roadmaps with intelligent suggestions and progress tracking.",
     tech: ["Gemini API", "Firebase", "LLM", "React"],
     github: "https://github.com/Abinayasuresh196/VisionBoardAI",
     live: "https://visionboardai.netlify.app/",
-    techDoc: "/docs/visionboard-technical.pdf", 
+    techDoc: "/docs/visionboard-technical.pdf",
     simpleDoc: "/docs/visionboard-simple.pdf",
     screenshots: [
       "/projects/visionboard/visionboard-screenshot1.png",
@@ -73,11 +117,21 @@ const projects: Project[] = [
       "/projects/visionboard/visionboard-screenshot3.png",
     ],
     demoVideo: "/projects/visionboard/visionboard-demo.mp4",
+    featuredBadge: "🤖 AI Project",
+    role: "Solo Developer",
+    challenges: [
+      "Integrating Gemini API for intelligent goal-planning suggestions",
+      "Managing user data and authentication with Firebase",
+    ],
+    learnings: [
+      "Working with LLM APIs for AI-assisted product features",
+      "Combining React frontends with Firebase backend services",
+    ],
   },
-  { 
+  {
     name: "Eco-Vision",
     status: "Completed",
-    desc: "Carbon footprint calculator and waste tracking platform with AI-driven sustainability insights.",
+    desc: "Carbon-footprint tracking and waste-management platform that delivers AI-driven sustainability insights for individuals and communities.",
     tech: ["Next.js", "AI", "React", "Node.js", "Clerk Authentication", "Drizzle ORM"],
     github: "https://github.com/Abinayasuresh196/Eco-Vision",
     techDoc: "/docs/ecovision-technical.pdf",
@@ -89,11 +143,22 @@ const projects: Project[] = [
       "/projects/eco-vision/eco-vision-screenshot3.png",
     ],
     demoVideo: "/projects/eco-vision/eco-vision-demo.mp4",
+    featuredBadge: "🤖 AI Project",
+    year: "2025",
+    role: "Solo Developer",
+    challenges: [
+      "Building AI-driven sustainability insights on top of user activity data",
+      "Integrating Clerk authentication with a Next.js and Drizzle ORM stack",
+    ],
+    learnings: [
+      "Full-stack development with Next.js, Clerk, and Drizzle ORM",
+      "Applying AI features to real-world environmental tracking use cases",
+    ],
   },
   {
     name: "NEXUS (Instagram Clone)",
     status: "Completed",
-    desc: "Social media platform replicating Instagram's core features including posts, stories, and real-time messaging.",
+    desc: "Social platform inspired by Instagram, featuring posts, stories, and real-time messaging with a modern, responsive UI.",
     tech: ["MERN", "Supabase", "Real-time", "Socket.io"],
     github: "https://github.com/Abinayasuresh196/NEXUS-Social-media-app",
     techDoc: "/docs/nexus-technical.pdf",
@@ -105,11 +170,21 @@ const projects: Project[] = [
       "/projects/communication/communication-screenshot3.png",
     ],
     demoVideo: "/projects/communication/communication-demo.mp4",
+    year: "2025",
+    role: "Solo Developer",
+    challenges: [
+      "Implementing real-time messaging with Socket.io alongside a MERN backend",
+      "Replicating social media UX patterns including posts and stories",
+    ],
+    learnings: [
+      "Real-time communication patterns with WebSockets",
+      "Integrating Supabase with a MERN stack application",
+    ],
   },
   {
     name: "Real-time Chat App (Telegram Clone)",
     status: "Completed",
-    desc: "Real-time messaging application inspired by Telegram with group chats, media sharing and encryption.",
+    desc: "Real-time messaging application inspired by Telegram with secure group chats, rich media sharing, and real-time updates.",
     tech: ["MERN", "Mongo Atlas", "WebSocket", "Node.js"],
     github: "https://github.com/Abinayasuresh196/Real-Time-Chat-Application",
     techDoc: "/docs/chatapp-technical.pdf",
@@ -121,11 +196,21 @@ const projects: Project[] = [
       "/projects/communication1/communication1-screenshot3.png",
     ],
     demoVideo: "/projects/communication1/communication1-demo.mp4",
+    year: "2025",
+    role: "Solo Developer",
+    challenges: [
+      "Handling real-time message delivery across multiple chat rooms",
+      "Supporting rich media sharing with secure data storage in MongoDB Atlas",
+    ],
+    learnings: [
+      "WebSocket-based real-time architecture with Node.js",
+      "Building Telegram-inspired messaging UX with the MERN stack",
+    ],
   },
   {
     name: "Food Stall Management",
     status: "Completed",
-    desc: "Role-based food ordering and stall management system with real-time order tracking.",
+    desc: "Role-based food-ordering and stall-operations system with real-time order tracking and actionable analytics.",
     tech: ["React", "Spring Boot", "MySQL", "Role-based"],
     github: "https://github.com/Abinayasuresh196/event-management_foodstall",
     techDoc: "/docs/foodstall-technical.pdf",
@@ -136,32 +221,52 @@ const projects: Project[] = [
       "/projects/foodstall/foodstall-screenshot3.png",
       "/projects/foodstall/foodstall-screenshot4.png",
     ],
-    linkedin : "https://www.linkedin.com/posts/pon-abinaya-38ab67290_springboot-reactjs-mysql-activity-7381723019028660225-qETT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEamm1oB0e_WuefiXCt-D5RQYxCEpOna_WE",
+    linkedin: "https://www.linkedin.com/posts/pon-abinaya-38ab67290_springboot-reactjs-mysql-activity-7381723019028660225-qETT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEamm1oB0e_WuefiXCt-D5RQYxCEpOna_WE",
     demoVideo: "/projects/foodstall/foodstall-demo.mp4",
+    year: "2025",
+    role: "Solo Developer",
+    challenges: [
+      "Designing role-based access for stall operators and customers",
+      "Connecting a React frontend with a Spring Boot and MySQL backend",
+    ],
+    learnings: [
+      "Full-stack integration between React and Spring Boot",
+      "Building role-based authorization flows for multi-user systems",
+    ],
   },
   {
     name: "Learn Craft Hub",
     status: "Completed",
-    desc: "E-learning platform with role-based access for students, instructors, and admins with course management.",
+    desc: "E-learning platform with role-based access for students, instructors, and admins, featuring course management and progress tracking.",
     tech: ["MERN", "Role-based Auth", "REST API"],
     github: "https://github.com/Abinayasuresh196/learn-craft-hub",
     techDoc: "/docs/learncraft-technical.pdf",
     simpleDoc: "/docs/learncraft-simple.pdf",
-    linkedin:"https://www.linkedin.com/posts/pon-abinaya-38ab67290_mernstack-fullstackdeveloper-webdevelopment-activity-7383491004047437824-hWVO?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEamm1oB0e_WuefiXCt-D5RQYxCEpOna_WE",
+    linkedin: "https://www.linkedin.com/posts/pon-abinaya-38ab67290_mernstack-fullstackdeveloper-webdevelopment-activity-7383491004047437824-hWVO?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEamm1oB0e_WuefiXCt-D5RQYxCEpOna_WE",
     screenshots: [
       "/projects/learncraft/learncraft-screenshot1.png",
       "/projects/learncraft/learncraft-screenshot2.png",
       "/projects/learncraft/learncraft-screenshot3.png",
     ],
     demoVideo: "/projects/learncraft/learncraft-demo.mp4",
+    year: "2025",
+    role: "Solo Developer",
+    challenges: [
+      "Implementing role-based access for students, instructors, and admins",
+      "Building course management and progress tracking features",
+    ],
+    learnings: [
+      "Designing multi-role MERN applications with REST APIs",
+      "E-learning platform architecture and user flow design",
+    ],
   },
   {
     name: "E-Commerce Platform",
     status: "Completed",
-    desc: "Full-featured e-commerce application with role-based access, product management, cart, and payment integration.",
+    desc: "Full-featured e-commerce application with role-based admin and customer flows, product management, cart, and Stripe-based payment integration.",
     tech: ["MERN", "Role-based Auth", "Stripe"],
     github: "https://github.com/Abinayasuresh196/Local-Store-E-commerce-Application",
-    linkedin : "https://www.linkedin.com/posts/pon-abinaya-38ab67290_prodigyinfotech-fullstackdevelopment-ecommerceapplication-activity-7410935012721885185-Igku?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEamm1oB0e_WuefiXCt-D5RQYxCEpOna_WE",
+    linkedin: "https://www.linkedin.com/posts/pon-abinaya-38ab67290_prodigyinfotech-fullstackdevelopment-ecommerceapplication-activity-7410935012721885185-Igku?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEamm1oB0e_WuefiXCt-D5RQYxCEpOna_WE",
     techDoc: "/docs/ecommerce-technical.pdf",
     simpleDoc: "/docs/ecommerce-simple.pdf",
     screenshots: [
@@ -171,9 +276,17 @@ const projects: Project[] = [
       "/projects/e-commerce/e-commerce-screenshot4.png",
     ],
     demoVideo: "/projects/e-commerce/e-commerce-demo.mp4",
+    year: "2025",
+    role: "Solo Developer",
+    challenges: [
+      "Integrating Stripe payment processing with role-based admin and customer flows",
+      "Managing product catalog, cart state, and order lifecycle",
+    ],
+    learnings: [
+      "Payment gateway integration with Stripe in a MERN application",
+      "Building complete e-commerce workflows with role-based access control",
+    ],
   },
-  
-  
 ];
 
 // Extract repo name from GitHub URL
@@ -261,6 +374,11 @@ const ProjectDetailModal = ({
                 <DialogTitle className="font-syne font-bold text-xl text-foreground">
                   {project.name}
                 </DialogTitle>
+                {project.featuredBadge && (
+                  <Badge variant="default" className="bg-primary/20 text-primary border border-primary/30 text-[10px]">
+                    {project.featuredBadge}
+                  </Badge>
+                )}
                 <Badge variant={project.status === "Active" ? "default" : "secondary"} className="text-[10px]">
                   {project.status}
                 </Badge>
@@ -305,6 +423,23 @@ const ProjectDetailModal = ({
               {/* Overview Tab */}
               <TabsContent value="overview" className="mt-0">
                 <div className="space-y-4">
+                  {(project.year || project.role) && (
+                    <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                      {project.year && (
+                        <span className="inline-flex items-center gap-1.5">
+                          <Calendar size={14} />
+                          Built in {project.year}
+                        </span>
+                      )}
+                      {project.role && (
+                        <span className="inline-flex items-center gap-1.5">
+                          <Code size={14} />
+                          {project.role}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
                   {/* Tech Stack */}
                   <div>
                     <h4 className="font-syne font-semibold text-sm text-foreground mb-2">Tech Stack</h4>
@@ -319,6 +454,34 @@ const ProjectDetailModal = ({
                       ))}
                     </div>
                   </div>
+
+                  {project.challenges && project.challenges.length > 0 && (
+                    <div>
+                      <h4 className="font-syne font-semibold text-sm text-foreground mb-2">Challenges</h4>
+                      <ul className="space-y-1.5">
+                        {project.challenges.map((c) => (
+                          <li key={c} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary mt-1 shrink-0">▹</span>
+                            {c}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {project.learnings && project.learnings.length > 0 && (
+                    <div>
+                      <h4 className="font-syne font-semibold text-sm text-foreground mb-2">Key Learnings</h4>
+                      <ul className="space-y-1.5">
+                        {project.learnings.map((l) => (
+                          <li key={l} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary mt-1 shrink-0">▹</span>
+                            {l}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
                   {/* Links */}
                   <div>
@@ -564,13 +727,25 @@ const ProjectCard = ({
 
       {/* Content */}
       <div className="p-5">
-        <div className="flex items-start justify-between mb-2">
+        {project.featuredBadge && (
+          <div className="mb-2">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary bg-primary/10 border border-primary/20 px-2.5 py-0.5 rounded-full">
+              {project.featuredBadge}
+            </span>
+          </div>
+        )}
+        <div className="flex items-start justify-between mb-2 gap-2">
           <h3 className="font-syne font-bold text-lg text-foreground group-hover:text-primary transition-colors">
             {project.name}
           </h3>
-          <Badge variant={project.status === "Active" ? "default" : "secondary"} className="text-[10px] shrink-0">
-            {project.status}
-          </Badge>
+          <div className="flex flex-col items-end gap-1 shrink-0">
+            <Badge variant={project.status === "Active" ? "default" : "secondary"} className="text-[10px]">
+              {project.status}
+            </Badge>
+            {project.year && (
+              <span className="text-[10px] text-muted-foreground font-mono">{project.year}</span>
+            )}
+          </div>
         </div>
 
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">{project.desc}</p>
@@ -595,7 +770,7 @@ const Projects = () => {
         <span className="inline-flex items-center justify-center text-muted-foreground">
           <LayoutGrid size={16} />
         </span>
-        <h2 className="font-syne font-extrabold text-3xl text-foreground">Featured Projects</h2>
+        <h2 className="font-syne font-extrabold text-3xl text-foreground">Featured Work</h2>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

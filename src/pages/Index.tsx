@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import AboutMe from "@/components/AboutMe";
 import ContactChips from "@/components/ContactChips";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
@@ -18,6 +19,9 @@ const Index = () => {
       </FadeInSection>
       <FadeInSection delay={100}>
         <ContactChips />
+      </FadeInSection>
+      <FadeInSection delay={50}>
+        <AboutMe />
       </FadeInSection>
       <FadeInSection delay={50}>
         <Skills />
